@@ -24,6 +24,5 @@ function run {
 run picom
 run pasystray
 run nm-applet
-run ~/.fehbg
 ```
 
