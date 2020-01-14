@@ -632,6 +632,10 @@ awful.rules.rules = {
     screen = awful.screen.focused,
     properties = { sticky = true, skip_taskbar = true }
 },
+    { rule = { class = "Xfce4-terminal" },
+    screen = awful.screen.focused,
+    properties = { size_hints_honor = false}
+}
     }
 -- }}}
 
