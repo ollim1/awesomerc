@@ -18,6 +18,7 @@ local hotkeys_popup = require("awful.hotkeys_popup")
 -- Enable hotkeys help widget for VIM and other apps
 -- when client with a matching name is opened:
 require("awful.hotkeys_popup.keys")
+local host = require("host")
 
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
@@ -231,23 +232,28 @@ awful.screen.connect_for_each_screen(function(s)
     -- Create the wibox
     s.mywibox = awful.wibar({ position = "top", screen = s })
 
-    -- EDIT: Vicious widgets
+    -- EDIT: custom widgets
     cpuwidget = wibox.widget.textbox()
-    -- vicious.register(cpuwidget, vicious.widgets.cpu, " CPU $1% ($2% $3% $4% $5%) ")
     vicious.register(cpuwidget, vicious.widgets.cpu,
     function (widget, args)
         return ("<span font='monospace'>  CPU%3d%% (%3d%%%3d%%%3d%%%3d%%) </span>"):format(args[1],args[2],args[3],args[4],args[5])
     end)
     memwidget = wibox.widget.textbox()
-    -- vicious.register(memwidget, vicious.widgets.mem, " MEM $1% $2/$3MiB (buf $9MiB) ")
     vicious.register(memwidget, vicious.widgets.mem,
     function (widget, args)
-            return ("<span font='monospace'> MEM%3d%% %4d/%4dMiB (buf%4dMiB) </span>"):format(args[1], args[2], args[3], args[9] - args[2])
+        return ("<span font='monospace'> MEM%3d%% %4d/%4dMiB (buf%4dMiB) </span>"):format(args[1], args[2], args[3], args[9] - args[2])
     end)
     -- mpdwidget = wibox.widget.textbox()
     -- vicious.register(mpdwidget, vicious.widgets.mpd, "${state} ${volume}dB ${Elapsed}/${Duration} ${random} ${repeat} Track: ${Artist} - {$Title} Album: ${Album} ${Genre}")
     -- thermalwidget = wibox.widget.textbox()
     -- vicious.register(thermalwidget, vicious.widgets.thermal, "$1%")
+    local autorandr_button = nil
+    local batwidget = nil
+    if host.is_laptop then
+        autorandr_button = awful.widget.launcher({ image = "/home/londes/.icons/Papirus/24x24/panel/desktopconnected.svg" , command = "autorandr --change" })
+        batwidget = awful.widget.watch('bash -c "~/Documents/tools/battstat.sh -1"', 15)
+    end
+
 
     -- Add widgets to the wibox
     s.mywibox:setup {
@@ -261,13 +267,13 @@ awful.screen.connect_for_each_screen(function(s)
         s.mytasklist, -- Middle widget
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
-            -- mpdwidget,
             mykeyboardlayout,
             wibox.widget.systray(),
+            batwidget,
             cpuwidget,
             memwidget,
-            -- thermalwidget,
             mytextclock,
+            autorandr_button,
             s.mylayoutbox,
         },
     }
