@@ -247,10 +247,10 @@ awful.screen.connect_for_each_screen(function(s)
     -- vicious.register(mpdwidget, vicious.widgets.mpd, "${state} ${volume}dB ${Elapsed}/${Duration} ${random} ${repeat} Track: ${Artist} - {$Title} Album: ${Album} ${Genre}")
     -- thermalwidget = wibox.widget.textbox()
     -- vicious.register(thermalwidget, vicious.widgets.thermal, "$1%")
-    local autorandr_button = nil
+    local arandr_button = nil
     local batwidget = nil
-    if host.is_laptop then
-        autorandr_button = awful.widget.launcher({ image = "/home/londes/.icons/Papirus/24x24/panel/desktopconnected.svg" , command = "autorandr --change" })
+    if host.is_laptop == true then
+        arandr_button = awful.widget.launcher({ image = "/home/londes/.icons/Papirus/24x24/panel/desktopconnected.svg" , command = "arandr" })
         batwidget = awful.widget.watch('bash -c "~/Documents/tools/battstat.sh -1"', 15)
     end
 
@@ -273,7 +273,7 @@ awful.screen.connect_for_each_screen(function(s)
             cpuwidget,
             memwidget,
             mytextclock,
-            autorandr_button,
+            arandr_button,
             s.mylayoutbox,
         },
     }
@@ -444,6 +444,30 @@ globalkeys = gears.table.join(
               function () awful.spawn("telegram-desktop") end,
               { description = "open Telegram" })
 )
+
+if host.is_laptop == true then
+    gears.table.merge(globalkeys, gears.table.join(
+        awful.key({ "Mod4"            }, "F5",
+                  function () awful.spawn.with_shell("sudo /root/scripts/backlight.sh -d") end,
+                  { description = "lower brightness"}),
+        awful.key({ "Mod4"            }, "F6",
+                  function () awful.spawn.with_shell("sudo /root/scripts/backlight.sh -u") end,
+                  { description = "raise brighness"}),
+        awful.key({           "Shift" }, "XF86Display",
+                  function () awful.spawn.with_shell("arandr") end,
+                  { description = "open display configuration manager"}),
+        awful.key({ "Mod4",   "Shift" }, "F7",
+                  function () awful.spawn.with_shell("arandr") end,
+                  { description = "open display configuration manager"}),
+        awful.key({                   }, "XF86Display",
+                  function () awful.spawn.with_shell("autorandr --change") end,
+                  { description = "toggle or reset display configuration"}),
+        awful.key({ "Mod4"            }, "F7",
+                  function () awful.spawn.with_shell("autorandr --change") end,
+                  { description = "toggle or reset display configuration"})
+                  )
+    )
+end
 
 clientkeys = gears.table.join(
     awful.key({ modkey,           }, "f",
