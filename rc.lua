@@ -183,25 +183,15 @@ local tasklist_buttons = gears.table.join(
                                               awful.client.focus.byidx(-1)
                                           end))
 
-local function set_wallpaper(s)
-    -- Wallpaper
-    if beautiful.wallpaper then
-        local wallpaper = beautiful.wallpaper
-        -- If wallpaper is a function, call it with the screen
-        if type(wallpaper) == "function" then
-            wallpaper = wallpaper(s)
-        end
-        gears.wallpaper.maximized(wallpaper, s, true)
-    end
+local function set_wallpaper()
+    -- NOTE: using feh for setting wallpaper
+    awful.spawn.with_shell("~/.fehbg")
 end
 
 -- Re-set wallpaper when a screen's geometry changes (e.g. different resolution)
 screen.connect_signal("property::geometry", set_wallpaper)
 
 awful.screen.connect_for_each_screen(function(s)
-    -- Wallpaper
-    set_wallpaper(s)
-
     -- Each screen has its own tag table.
     awful.tag({ "web", "school1", "school2", "school3", "school4", "work", "hobby", "a", "b" }, s, awful.layout.layouts[1])
 
@@ -243,10 +233,6 @@ awful.screen.connect_for_each_screen(function(s)
     function (widget, args)
         return ("<span font='monospace'> MEM%3d%% %4d/%4dMiB (buf%4dMiB) </span>"):format(args[1], args[2], args[3], args[9] - args[2])
     end)
-    -- mpdwidget = wibox.widget.textbox()
-    -- vicious.register(mpdwidget, vicious.widgets.mpd, "${state} ${volume}dB ${Elapsed}/${Duration} ${random} ${repeat} Track: ${Artist} - {$Title} Album: ${Album} ${Genre}")
-    -- thermalwidget = wibox.widget.textbox()
-    -- vicious.register(thermalwidget, vicious.widgets.thermal, "$1%")
     local arandr_button = nil
     local batwidget = nil
     if host.is_laptop == true then
