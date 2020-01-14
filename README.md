@@ -1,11 +1,12 @@
 # AwesomeWM rice
-Required software: feh, amixer, mpv, i3lock, xclip
+Required software: feh, amixer, i3lock
+
+xclip and mpv for media playback hotkeys
 
 Before using, create the files `host.lua`, `autorun.sh` `~/.fehbg`. `host.lua` should have the following contents:
 
 ```
 module("host")
-local host = { }
 is_laptop = false
 ```
 
