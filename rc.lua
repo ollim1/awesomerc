@@ -61,9 +61,15 @@ editor_cmd = terminal .. " -e " .. editor
 -- However, you can use another modifier like Mod1, but it may interact with others.
 modkey = "Mod4"
 
--- EDIT: rice
+-- EDIT: custom functions
 
-sortClient = function(c)
+set_sizehints = function(c)
+    -- disable size hints for windows that are in tiling mode
+    c.size_hints_honor = c.floating
+end
+
+sort_client = function(c)
+    -- assign tags to windows based on name
     if c.name then
         local tagstring = nil
         if string.match(c.name, "%[%[fun%]%]") or string.match(c.name, "%[%[rice%]%]") then
@@ -422,10 +428,10 @@ globalkeys = gears.table.join(
     awful.key({modkey, "Mod1"}, "s",
               function () 
                   for _, c in ipairs(client.get()) do
-                      sortClient(c)
+                      sort_client(c)
                   end
               end,
-              { description = "sort windows based on name, see sortClient in rc.lua"}),
+              { description = "sort windows based on name, see sort_client in rc.lua"}),
     awful.key({modkey,    "Mod1"}, "t",
               function () awful.spawn("telegram-desktop") end,
               { description = "open Telegram" })
@@ -629,14 +635,10 @@ awful.rules.rules = {
     -- { rule = { class = "mpv" },
     -- properties = { floating = true }},
     { rule = { class = "TelegramDesktop" },
-    screen = awful.screen.focused,
-    properties = { sticky = true, skip_taskbar = true }
-},
-    { rule = { class = "Xfce4-terminal" },
-    screen = awful.screen.focused,
-    properties = { size_hints_honor = false}
-}
+        screen = awful.screen.focused,
+        properties = { sticky = true, skip_taskbar = true }
     }
+}
 -- }}}
 
 -- {{{ Signals
@@ -653,6 +655,8 @@ client.connect_signal("manage", function (c)
         -- Prevent clients from being unreachable after screen count changes.
         awful.placement.no_offscreen(c)
     end
+    set_sizehints(c)
+    sort_client(c)
 end)
 
 -- Add a titlebar if titlebars_enabled is set to true in the rules.
@@ -708,5 +712,5 @@ client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_n
 
 awful.spawn.with_shell("~/.config/awesome/autorun.sh")
 
-client.connect_signal("property::name", sortClient)
-client.connect_signal("manage", sortClient)
+client.connect_signal("property::floating", set_sizehints)
+client.connect_signal("property::name", sort_client)
