@@ -8,6 +8,7 @@ Before using, create the files `host.lua`, `autorun.sh` `~/.fehbg`. `host.lua` s
 ```
 module("host")
 is_laptop = false
+gap = 0
 ```
 
 Set the `is_laptop` to enable battery widget and arandr launcher. Currently the script referenced in the battery widget can be found in the "stuff" repository, but it is specific to devices with two batteries. Set `batwidget = nil` to disable battery stats or point the widget at a script of your choosing. Some hotkeys are also device dependent in laptop mode.

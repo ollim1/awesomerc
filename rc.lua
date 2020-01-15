@@ -712,5 +712,7 @@ client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_n
 
 awful.spawn.with_shell("~/.config/awesome/autorun.sh")
 
+beautiful.useless_gap = beautiful.xresources.apply_dpi(host.gap)
+
 client.connect_signal("property::floating", set_sizehints)
 client.connect_signal("property::name", sort_client)
