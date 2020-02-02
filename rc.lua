@@ -232,7 +232,7 @@ awful.screen.connect_for_each_screen(function(s)
     cpuwidget = wibox.widget.textbox()
     vicious.register(cpuwidget, vicious.widgets.cpu,
     function (widget, args)
-        return ("<span font='monospace'>  CPU%3d%% (%3d%%%3d%%%3d%%%3d%%) </span>"):format(args[1],args[2],args[3],args[4],args[5])
+        return ("<span font='monospace'>  CPU%3d%% (%3d%%%3d%%%3d%%%3d%%%3d%%%3d%%%3d%%%3d%%) </span>"):format(args[1],args[2],args[3],args[4],args[5],args[6],args[7],args[8],args[9])
     end)
     memwidget = wibox.widget.textbox()
     vicious.register(memwidget, vicious.widgets.mem,
