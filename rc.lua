@@ -229,15 +229,17 @@ awful.screen.connect_for_each_screen(function(s)
     s.mywibox = awful.wibar({ position = "top", screen = s, bg = "#00000077"})
 
     -- EDIT: custom widgets
+    cpuicon = wibox.widget.imagebox(os.getenv("HOME").."/.config/awesome/icons/indicator-cpufreq_17x17.png", false)
     cpuwidget = wibox.widget.textbox()
     vicious.register(cpuwidget, vicious.widgets.cpu,
     function (widget, args)
-        return ("<span font='monospace'>  CPU%3d%% (%3d%%%3d%%%3d%%%3d%%%3d%%%3d%%%3d%%%3d%%) </span>"):format(args[1],args[2],args[3],args[4],args[5],args[6],args[7],args[8],args[9])
+        return ("<span font='monospace'>%3d%% (%3d%%%3d%%%3d%%%3d%%%3d%%%3d%%%3d%%%3d%%) </span>"):format(args[1],args[2],args[3],args[4],args[5],args[6],args[7],args[8],args[9])
     end)
+    memicon = wibox.widget.imagebox(os.getenv("HOME").."/.config/awesome/icons/indicator-sensors-memory.png", false)
     memwidget = wibox.widget.textbox()
     vicious.register(memwidget, vicious.widgets.mem,
     function (widget, args)
-        return ("<span font='monospace'> MEM%3d%% %4d/%4dMiB (buf%4dMiB) </span>"):format(args[1], args[2], args[3], args[9] - args[2])
+        return ("<span font='monospace'>%3d%% %4d/%4dMiB (buf%4dMiB) </span>"):format(args[1], args[2], args[3], args[9] - args[2])
     end)
     local arandr_button = nil
     local batwidget = nil
@@ -262,7 +264,9 @@ awful.screen.connect_for_each_screen(function(s)
             mykeyboardlayout,
             wibox.widget.systray(),
             batwidget,
+            cpuicon,
             cpuwidget,
+            memicon,
             memwidget,
             mytextclock,
             arandr_button,
