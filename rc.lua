@@ -229,6 +229,8 @@ awful.screen.connect_for_each_screen(function(s)
     s.mywibox = awful.wibar({ position = "top", screen = s, bg = "#00000077"})
 
     -- EDIT: custom widgets
+    s.systray = wibox.widget.systray()
+    s.systray.visible = false
     cpuicon = wibox.widget.imagebox(os.getenv("HOME").."/.config/awesome/icons/indicator-cpufreq_17x17.png", false)
     cpuwidget = wibox.widget.textbox()
     vicious.register(cpuwidget, vicious.widgets.cpu,
@@ -262,7 +264,7 @@ awful.screen.connect_for_each_screen(function(s)
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
             mykeyboardlayout,
-            wibox.widget.systray(),
+            s.systray,
             batwidget,
             cpuicon,
             cpuwidget,
@@ -438,7 +440,12 @@ globalkeys = gears.table.join(
               { description = "sort windows based on name, see sort_client in rc.lua"}),
     awful.key({modkey,    "Mod1"}, "t",
               function () awful.spawn("telegram-desktop") end,
-              { description = "open Telegram" })
+              { description = "open Telegram" }),
+    awful.key({ modkey }, "=",
+              function ()
+                awful.screen.focused().systray.visible = not awful.screen.focused().systray.visible
+              end,
+              {description = "Toggle systray visibility", group = "custom"})
 )
 
 if host.is_laptop == true then
