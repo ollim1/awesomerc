@@ -230,7 +230,7 @@ awful.screen.connect_for_each_screen(function(s)
 
     -- EDIT: custom widgets
     s.systray = wibox.widget.systray()
-    s.systray.visible = false
+    s.systray.visible = true
     cpuicon = wibox.widget.imagebox(os.getenv("HOME").."/.config/awesome/icons/indicator-cpufreq_17x17.png", false)
     cpuwidget = wibox.widget.textbox()
     vicious.register(cpuwidget, vicious.widgets.cpu,

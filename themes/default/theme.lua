@@ -14,14 +14,14 @@ local theme = {}
 theme.font          = "sans 7"
 
 theme.bg_normal     = "#000000aa"
-theme.bg_focus      = "#535d6caa"
+theme.bg_focus      = "#eeeeeeaa"
 theme.bg_urgent     = "#ff0000aa"
 theme.bg_minimize   = "#00000000"
 theme.bg_systray    = "#00000000"
 
 theme.fg_normal     = "#ffffff"
-theme.fg_focus      = "#ffffff"
-theme.fg_urgent     = "#ffffff"
+theme.fg_focus      = "#000000"
+theme.fg_urgent     = "#000000"
 theme.fg_minimize   = "#aaaaaabb"
 
 theme.useless_gap   = dpi(0)
