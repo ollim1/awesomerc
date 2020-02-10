@@ -2,7 +2,9 @@
 #include    <math.h>
 
 /*
- * A blur kernel calculator for desktop rice.
+ * A blur kernel calculator for picom.
+ * TODO: make output format directly compatible with picom's blur-kern variable format
+ * currently you need to prepend the dimensions and possibly remove the last element
  * May implement other kinds of blur later.
  */
 double bokeh(int x, int y, double radius, int width, int height);
