@@ -13,7 +13,7 @@ local theme = {}
 
 theme.font          = "sans 7"
 
-theme.bg_normal     = "#000000aa"
+theme.bg_normal     = "#00000099"
 theme.bg_focus      = "#eeeeeeaa"
 theme.bg_urgent     = "#ff0000aa"
 theme.bg_minimize   = "#00000000"
@@ -31,7 +31,6 @@ theme.border_focus  = "#808080"
 theme.border_marked = "#91231c"
 
 theme.tasklist_bg_normal = "#00000000"
-theme.bg_systray = "#00000000"
 -- There are other variable sets
 -- overriding the default one when
 -- defined, the sets are:
