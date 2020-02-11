@@ -657,8 +657,7 @@ awful.rules.rules = {
 client.connect_signal("manage", function (c)
     -- Set the windows at the slave,
     -- i.e. put it at the end of others instead of setting it master.
-    -- EDIT: enabled this
-    if not awesome.startup then awful.client.setslave(c) end
+    -- if not awesome.startup then awful.client.setslave(c) end
 
     if awesome.startup
       and not c.size_hints.user_position
@@ -668,6 +667,10 @@ client.connect_signal("manage", function (c)
     end
     set_sizehints(c)
     sort_client(c)
+    -- EDIT: place clients next to master
+    if not awesome.startup then
+        awful.client.swap.byidx(1)
+    end
 end)
 
 -- Add a titlebar if titlebars_enabled is set to true in the rules.
