@@ -35,3 +35,6 @@ run nm-applet
 ```
 feh --no-fehbg --bg-scale ~/Pictures/wallpapers/wallpaper.png
 ```
+
+### other
+Press mod4 + = to toggle the visibility of the system tray.
