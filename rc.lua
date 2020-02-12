@@ -19,6 +19,8 @@ local hotkeys_popup = require("awful.hotkeys_popup")
 -- when client with a matching name is opened:
 require("awful.hotkeys_popup.keys")
 local host = require("host")
+local pbattery = require("awesome-wm-widgets.battery-widget.battery")
+local mpdarc_widget = require("awesome-wm-widgets.mpdarc-widget.mpdarc")
 
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
@@ -231,23 +233,49 @@ awful.screen.connect_for_each_screen(function(s)
     -- EDIT: custom widgets
     s.systray = wibox.widget.systray()
     s.systray.visible = true
-    cpuicon = wibox.widget.imagebox(os.getenv("HOME").."/.config/awesome/icons/indicator-cpufreq_17x17.png", false)
+
+    mpd_widget = mpdarc_widget
     cpuwidget = wibox.widget.textbox()
     vicious.register(cpuwidget, vicious.widgets.cpu,
     function (widget, args)
-        return ("<span font='monospace'>%3d%% (%3d%%%3d%%%3d%%%3d%%%3d%%%3d%%%3d%%%3d%%) </span>"):format(args[1],args[2],args[3],args[4],args[5],args[6],args[7],args[8],args[9])
+        return ("<span font='monospace'>%3d%% (%3d%%%3d%%%3d%%%3d%%%3d%%%3d%%%3d%%%3d%%)</span>"):format(args[1],args[2],args[3],args[4],args[5],args[6],args[7],args[8],args[9])
     end)
-    memicon = wibox.widget.imagebox(os.getenv("HOME").."/.config/awesome/icons/indicator-sensors-memory.png", false)
+    cpuwidget_container = wibox.widget {
+        wibox.widget {
+            wibox.widget.imagebox(os.getenv("HOME").."/.config/awesome/icons/indicator-cpufreq_17x17.png", false),
+            cpuwidget,
+            layout = wibox.layout.fixed.horizontal
+        },
+        layout = wibox.container.margin(_,4,4,0)
+    }
+
     memwidget = wibox.widget.textbox()
     vicious.register(memwidget, vicious.widgets.mem,
     function (widget, args)
-        return ("<span font='monospace'>%3d%% %4d/%4dMiB (buf%4dMiB) </span>"):format(args[1], args[2], args[3], args[9] - args[2])
+        return ("<span font='monospace'>%3d%% %4d/%4dMiB (buf%4dMiB)</span>"):format(args[1], args[2], args[3], args[9] - args[2])
     end)
-    local arandr_button = nil
-    local batwidget = nil
+    memwidget_container = wibox.widget {
+        wibox.widget {
+            wibox.widget.imagebox(os.getenv("HOME").."/.config/awesome/icons/indicator-sensors-memory.png", false),
+            memwidget,
+            layout = wibox.layout.fixed.horizontal
+        },
+        layout = wibox.container.margin(_,4,4,0)
+    }
+
+    arandr_button = nil
+    batwidget_container = nil
     if host.is_laptop == true then
+        -- NOTE: Arc icon theme must be installed and in the directory /usr/share/.icons
+        batwidget_container = wibox.widget {
+            wibox.widget {
+                pbattery(),
+                awful.widget.watch('bash -c "~/Documents/tools/battstat.sh -1"', 15),
+                layout = wibox.layout.fixed.horizontal
+            },
+            layout = wibox.container.margin(_, 4, 4, 0)
+        }
         arandr_button = awful.widget.launcher({ image = "/home/londes/.icons/Papirus/24x24/panel/desktopconnected.svg" , command = "arandr" })
-        batwidget = awful.widget.watch('bash -c "~/Documents/tools/battstat.sh -1"', 15)
     end
 
 
@@ -265,11 +293,10 @@ awful.screen.connect_for_each_screen(function(s)
             layout = wibox.layout.fixed.horizontal,
             mykeyboardlayout,
             s.systray,
-            batwidget,
-            cpuicon,
-            cpuwidget,
-            memicon,
-            memwidget,
+            mpd_widget,
+            batwidget_container,
+            cpuwidget_container,
+            memwidget_container,
             mytextclock,
             arandr_button,
             s.mylayoutbox,
