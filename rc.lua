@@ -149,7 +149,11 @@ mykeyboardlayout = awful.widget.keyboardlayout()
 
 -- {{{ Wibar
 -- Create a textclock widget
-mytextclock = wibox.widget.textclock()
+-- EDIT: adjust margin
+clock_container = wibox.widget {
+    wibox.widget.textclock(),
+    layout = wibox.container.margin(_,4,8,-2)
+}
 
 -- Create a wibox for each screen and add it
 local taglist_buttons = gears.table.join(
@@ -297,7 +301,7 @@ awful.screen.connect_for_each_screen(function(s)
             batwidget_container,
             cpuwidget_container,
             memwidget_container,
-            mytextclock,
+            clock_container,
             arandr_button,
             s.mylayoutbox,
         },
