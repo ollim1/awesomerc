@@ -109,7 +109,7 @@ end
 mpdarc:connect_signal("mouse::enter", function() show_MPD_status() end)
 mpdarc:connect_signal("mouse::leave", function() naughty.destroy(notification) end)
 
-watch(GET_MPD_CMD, 1, update_graphic, mpdarc)
+watch(GET_MPD_CMD, 5, update_graphic, mpdarc)
 
 local mpdarc_widget = wibox.widget{
     mpdarc_icon_widget,

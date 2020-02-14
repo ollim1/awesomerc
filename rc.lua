@@ -247,7 +247,7 @@ awful.screen.connect_for_each_screen(function(s)
     vicious.register(cpuwidget, vicious.widgets.cpu,
     function (widget, args)
         return ("<span font='monospace'>%3d%% (%3d%%%3d%%%3d%%%3d%%%3d%%%3d%%%3d%%%3d%%)</span>"):format(args[1],args[2],args[3],args[4],args[5],args[6],args[7],args[8],args[9])
-    end)
+    end, 5)
     cpuwidget_container = wibox.widget {
         wibox.widget {
             wibox.widget.imagebox(os.getenv("HOME").."/.config/awesome/icons/indicator-cpufreq_17x17.png", false),
@@ -264,7 +264,7 @@ awful.screen.connect_for_each_screen(function(s)
     vicious.register(memwidget, vicious.widgets.mem,
     function (widget, args)
         return ("<span font='monospace'>%3d%% %4d/%4dMiB (buf%4dMiB)</span>"):format(args[1], args[2], args[3], args[9] - args[2])
-    end)
+    end, 5)
     memwidget_container = wibox.widget {
         wibox.widget {
             wibox.widget.imagebox(os.getenv("HOME").."/.config/awesome/icons/indicator-sensors-memory.png", false),
