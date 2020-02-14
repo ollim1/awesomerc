@@ -250,7 +250,7 @@ awful.screen.connect_for_each_screen(function(s)
             cpuwidget,
             layout = wibox.layout.fixed.horizontal
         },
-        layout = wibox.container.margin(_,4,4,0)
+        layout = wibox.container.margin(_, 4, 4, 0)
     }
 
     memwidget = wibox.widget.textbox()
@@ -264,7 +264,7 @@ awful.screen.connect_for_each_screen(function(s)
             memwidget,
             layout = wibox.layout.fixed.horizontal
         },
-        layout = wibox.container.margin(_,4,4,0)
+        layout = wibox.container.margin(_, 4, 4, 0)
     }
 
     arandr_button = nil
@@ -295,9 +295,9 @@ awful.screen.connect_for_each_screen(function(s)
         s.mytasklist, -- Middle widget
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
-            mykeyboardlayout,
             s.systray,
             mpd_widget,
+            mykeyboardlayout,
             batwidget_container,
             cpuwidget_container,
             memwidget_container,
@@ -441,6 +441,9 @@ globalkeys = gears.table.join(
     awful.key({"Mod4", "Mod1"}, "n",
               function () awful.spawn.with_shell("xclip -o | xargs mpv") end,
               { description = "open copied url in mpv" }),
+    awful.key({"Mod4", "Mod1"}, "m",
+              function () awful.spawn.with_shell("~/.scripts/sinkswitch.sh") end,
+              { description = "switch pulseaudio output sink of currently active client" }),
     awful.key({"Control", "Mod1"}, "l",
               function () awful.spawn.with_shell("i3lock -uc aa0000") end,
               { description = "lock the screen" }),
