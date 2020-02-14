@@ -266,6 +266,10 @@ awful.screen.connect_for_each_screen(function(s)
         },
         layout = wibox.container.margin(_, 4, 4, 0)
     }
+    kblayout_container = wibox.widget {
+        mykeyboardlayout,
+        layout = wibox.container.margin(_,0,0,-3)
+    }
 
     arandr_button = nil
     batwidget_container = nil
@@ -297,7 +301,7 @@ awful.screen.connect_for_each_screen(function(s)
             layout = wibox.layout.fixed.horizontal,
             s.systray,
             mpd_widget,
-            mykeyboardlayout,
+            kblayout_container,
             batwidget_container,
             cpuwidget_container,
             memwidget_container,
