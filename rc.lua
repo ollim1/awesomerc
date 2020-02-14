@@ -238,7 +238,11 @@ awful.screen.connect_for_each_screen(function(s)
     s.systray = wibox.widget.systray()
     s.systray.visible = true
 
-    mpd_widget = mpdarc_widget
+    mpdwidget_container = wibox.widget {
+        mpdarc_widget,
+        layout = wibox.container.margin(_,4,4,0)
+    }
+
     cpuwidget = wibox.widget.textbox()
     vicious.register(cpuwidget, vicious.widgets.cpu,
     function (widget, args)
@@ -274,7 +278,7 @@ awful.screen.connect_for_each_screen(function(s)
     }
     kblayout_container = wibox.widget {
         mykeyboardlayout,
-        layout = wibox.container.margin(_, 0, 0, 0)
+        layout = wibox.container.margin(_, 4, 0, 0)
     }
 
     arandr_button = nil
@@ -306,7 +310,7 @@ awful.screen.connect_for_each_screen(function(s)
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
             s.systray,
-            mpd_widget,
+            mpdwidget_container,
             kblayout_container,
             batwidget_container,
             cpuwidget_container,
