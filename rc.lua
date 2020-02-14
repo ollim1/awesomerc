@@ -152,7 +152,7 @@ mykeyboardlayout = awful.widget.keyboardlayout()
 -- EDIT: adjust margin
 clock_container = wibox.widget {
     wibox.widget.textclock(),
-    layout = wibox.container.margin(_,4,8,-2)
+    layout = wibox.container.margin(_, 4, 8, 0)
 }
 
 -- Create a wibox for each screen and add it
@@ -247,7 +247,10 @@ awful.screen.connect_for_each_screen(function(s)
     cpuwidget_container = wibox.widget {
         wibox.widget {
             wibox.widget.imagebox(os.getenv("HOME").."/.config/awesome/icons/indicator-cpufreq_17x17.png", false),
-            cpuwidget,
+            wibox.widget {
+                cpuwidget,
+                layout = wibox.container.margin(_, 0, 0, 2)
+            },
             layout = wibox.layout.fixed.horizontal
         },
         layout = wibox.container.margin(_, 4, 4, 0)
@@ -261,14 +264,17 @@ awful.screen.connect_for_each_screen(function(s)
     memwidget_container = wibox.widget {
         wibox.widget {
             wibox.widget.imagebox(os.getenv("HOME").."/.config/awesome/icons/indicator-sensors-memory.png", false),
-            memwidget,
+            wibox.widget {
+                memwidget,
+                layout = wibox.container.margin(_, 0, 0, 2)
+            },
             layout = wibox.layout.fixed.horizontal
         },
         layout = wibox.container.margin(_, 4, 4, 0)
     }
     kblayout_container = wibox.widget {
         mykeyboardlayout,
-        layout = wibox.container.margin(_,0,0,-3)
+        layout = wibox.container.margin(_, 0, 0, 0)
     }
 
     arandr_button = nil
