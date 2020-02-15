@@ -493,7 +493,10 @@ globalkeys = gears.table.join(
               function ()
                 awful.screen.focused().systray.visible = not awful.screen.focused().systray.visible
               end,
-              {description = "Toggle systray visibility", group = "custom"})
+              {description = "Toggle systray visibility", group = "custom"}),
+    awful.key({"Mod4",    "Mod1"}, "c",
+              function () awful.spawn.with_shell("mpc toggle") end,
+              { description = "play/pause mpd" })
 )
 
 if host.is_laptop == true then

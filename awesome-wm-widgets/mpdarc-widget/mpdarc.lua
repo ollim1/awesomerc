@@ -113,7 +113,7 @@ watch(GET_MPD_CMD, 5, update_graphic, mpdarc)
 
 local mpdarc_widget = wibox.widget{
     mpdarc_icon_widget,
-    mpdarc_current_song_widget,
+    -- mpdarc_current_song_widget,
     layout = wibox.layout.align.horizontal,
     }
 return mpdarc_widget
