@@ -19,7 +19,7 @@ local dpi = require('beautiful').xresources.apply_dpi
 -- Battery 0: Discharging, 75%, 01:51:38 remaining
 -- Battery 0: Charging, 53%, 00:57:43 until charged
 
-local PATH_TO_ICONS = "/usr/share/icons/Arc/status/symbolic/"
+local PATH_TO_ICONS = "/usr/share/icons/Papirus-Dark/symbolic/status/"
 local HOME = os.getenv("HOME")
 
 local battery_widget = {}

@@ -1,6 +1,8 @@
 # AwesomeWM rice
 Required software: feh, amixer, i3lock
 
+Uses the Papirus and Arc icon sets, install them to /usr/share/icons
+
 xclip and mpv for media playback hotkeys
 
 Before using, create the files `host.lua`, `autorun.sh` `~/.fehbg`. `host.lua` should have the following contents:
