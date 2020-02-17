@@ -263,7 +263,7 @@ awful.screen.connect_for_each_screen(function(s)
     memwidget = wibox.widget.textbox()
     vicious.register(memwidget, vicious.widgets.mem,
     function (widget, args)
-        return ("<span font='monospace'>%3d%% %4d/%4dMiB (buf%4dMiB)</span>"):format(args[1], args[2], args[3], args[9] - args[2])
+        return ("<span font='monospace'>%3d%% %4dMiB</span>"):format(args[1], args[2])
     end, 5)
     memwidget_container = wibox.widget {
         wibox.widget {
