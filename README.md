@@ -5,6 +5,10 @@ Uses the Papirus and Arc icon sets, install them to /usr/share/icons
 
 xclip and mpv for media playback hotkeys
 
+mpd and mpc for mpd widget
+
+sysstat for cpu stats
+
 Before using, create the files `host.lua`, `autorun.sh` `~/.fehbg`. `host.lua` should have the following contents:
 
 ```

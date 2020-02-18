@@ -31,6 +31,9 @@ theme.border_focus  = "#808080"
 theme.border_marked = "#91231c"
 
 theme.tasklist_bg_normal = "#00000000"
+theme.graph_fg = "#d3dae3"
+theme.graph_bg = "#00000000"
+theme.graph_border_color = "#00000000"
 -- There are other variable sets
 -- overriding the default one when
 -- defined, the sets are:

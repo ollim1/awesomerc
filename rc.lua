@@ -21,6 +21,7 @@ require("awful.hotkeys_popup.keys")
 local host = require("host")
 local pbattery = require("awesome-wm-widgets.battery-widget.battery")
 local mpdarc_widget = require("awesome-wm-widgets.mpdarc-widget.mpdarc")
+local watch = require("awful.widget.watch")
 
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
@@ -243,18 +244,104 @@ awful.screen.connect_for_each_screen(function(s)
         layout = wibox.container.margin(_,4,4,0)
     }
 
-    cpuwidget = wibox.widget.textbox()
-    vicious.register(cpuwidget, vicious.widgets.cpu,
-    function (widget, args)
-        return ("<span font='monospace'>%3d%% (%3d%%%3d%%%3d%%%3d%%%3d%%%3d%%%3d%%%3d%%)</span>"):format(args[1],args[2],args[3],args[4],args[5],args[6],args[7],args[8],args[9])
-    end, 5)
+    cpugraph_all = awful.widget.graph({width = 16})
+    cpugraph_cpu1 = awful.widget.graph({width = 8})
+    cpugraph_cpu2 = awful.widget.graph({width = 8})
+    cpugraph_cpu3 = awful.widget.graph({width = 8})
+    cpugraph_cpu4 = awful.widget.graph({width = 8})
+    cpugraph_cpu5 = awful.widget.graph({width = 8})
+    cpugraph_cpu6 = awful.widget.graph({width = 8})
+    cpugraph_cpu7 = awful.widget.graph({width = 8})
+    cpugraph_cpu8 = awful.widget.graph({width = 8})
+    -- TODO: try to get all widgets to update using the same watch widget
+    watch([[bash -c "mpstat 1 1 | awk '{if(NR==4) printf \"%3.0f\n\", 100 - \$NF }'"]], 2,
+    function(widget, s)
+        widget:add_value(tonumber(s) / 100)
+    end,
+    cpugraph_all)
+    watch([[bash -c "mpstat -P 1 1 1 | awk '{if(NR==4) printf \"%3.0f\n\", 100 - \$NF }'"]], 2,
+    function(widget, s)
+        widget:add_value(tonumber(s) / 100)
+    end,
+    cpugraph_cpu1)
+    watch([[bash -c "mpstat -P 2 1 1 | awk '{if(NR==4) printf \"%3.0f\n\", 100 - \$NF }'"]], 2,
+    function(widget, s)
+        widget:add_value(tonumber(s) / 100)
+    end,
+    cpugraph_cpu2)
+    watch([[bash -c "mpstat -P 3 1 1 | awk '{if(NR==4) printf \"%3.0f\n\", 100 - \$NF }'"]], 2,
+    function(widget, s)
+        widget:add_value(tonumber(s) / 100)
+    end,
+    cpugraph_cpu3)
+    watch([[bash -c "mpstat -P 4 1 1 | awk '{if(NR==4) printf \"%3.0f\n\", 100 - \$NF }'"]], 2,
+    function(widget, s)
+        widget:add_value(tonumber(s) / 100)
+    end,
+    cpugraph_cpu4)
+    watch([[bash -c "mpstat -P 5 1 1 | awk '{if(NR==4) printf \"%3.0f\n\", 100 - \$NF }'"]], 2,
+    function(widget, s)
+        widget:add_value(tonumber(s) / 100)
+    end,
+    cpugraph_cpu5)
+    watch([[bash -c "mpstat -P 6 1 1 | awk '{if(NR==4) printf \"%3.0f\n\", 100 - \$NF }'"]], 2,
+    function(widget, s)
+        widget:add_value(tonumber(s) / 100)
+    end,
+    cpugraph_cpu6)
+    watch([[bash -c "mpstat -P 7 1 1 | awk '{if(NR==4) printf \"%3.0f\n\", 100 - \$NF }'"]], 2,
+    function(widget, s)
+        widget:add_value(tonumber(s) / 100)
+    end,
+    cpugraph_cpu7)
+    watch([[bash -c "mpstat -P 8 1 1 | awk '{if(NR==4) printf \"%3.0f\n\", 100 - \$NF }'"]], 2,
+    function(widget, s)
+        widget:add_value(tonumber(s) / 100)
+    end,
+    cpugraph_cpu8)
+    cpugraph_container = wibox.widget {
+        wibox.widget {
+            wibox.widget {
+                cpugraph_cpu8,
+                cpugraph_cpu6,
+                cpugraph_cpu4,
+                cpugraph_cpu2,
+                cpugraph_cpu7,
+                cpugraph_cpu5,
+                cpugraph_cpu3,
+                cpugraph_cpu1,
+                forced_num_rows = 2,
+                forced_num_cols = 4,
+                homogenous = true,
+                expand = true,
+                spacing = 1,
+                layout = wibox.layout.grid
+            },
+            wibox.widget {
+                cpugraph_all,
+                layout = wibox.container.margin(_,1,0,0)
+            },
+            layout = wibox.layout.fixed.horizontal
+        },
+        reflection = {
+            horizontal = true;
+            vertical = false;
+        },
+        layout = wibox.container.mirror
+    }
+--     cpuwidget = wibox.widget.textbox()
+--     vicious.register(cpuwidget, vicious.widgets.cpu,
+--     function (widget, args)
+--         return ("<span font='monospace'>%3d%% (%3d%%%3d%%%3d%%%3d%%%3d%%%3d%%%3d%%%3d%%)</span>"):format(args[1],args[2],args[3],args[4],args[5],args[6],args[7],args[8],args[9])
+--     end, 5)
     cpuwidget_container = wibox.widget {
         wibox.widget {
             wibox.widget.imagebox(os.getenv("HOME").."/.config/awesome/icons/indicator-cpufreq_17x17.png", false),
-            wibox.widget {
-                cpuwidget,
-                layout = wibox.container.margin(_, 0, 0, 2)
-            },
+--             wibox.widget {
+--                 cpuwidget,
+--                 layout = wibox.container.margin(_, 0, 0, 2)
+--             },
+            cpugraph_container,
             layout = wibox.layout.fixed.horizontal
         },
         layout = wibox.container.margin(_, 4, 4, 0)
