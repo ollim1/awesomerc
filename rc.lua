@@ -254,47 +254,47 @@ awful.screen.connect_for_each_screen(function(s)
     cpugraph_cpu7 = awful.widget.graph({width = 8})
     cpugraph_cpu8 = awful.widget.graph({width = 8})
     -- TODO: try to get all widgets to update using the same watch widget
-    watch([[bash -c "mpstat 1 1 | awk '{if(NR==4) printf \"%3.0f\n\", 100 - \$NF }'"]], 5,
+    watch([[bash -c "mpstat 5 1 | awk '{if(NR==4) printf \"%3.0f\n\", 100 - \$NF }'"]], 1,
     function(widget, s)
         widget:add_value(tonumber(s) / 100)
     end,
     cpugraph_all)
-    watch([[bash -c "mpstat -P 0 1 1 | awk '{if(NR==4) printf \"%3.0f\n\", 100 - \$NF }'"]], 5,
+    watch([[bash -c "mpstat -P 0 5 1 | awk '{if(NR==4) printf \"%3.0f\n\", 100 - \$NF }'"]], 1,
     function(widget, s)
         widget:add_value(tonumber(s) / 100)
     end,
     cpugraph_cpu1)
-    watch([[bash -c "mpstat -P 1 1 1 | awk '{if(NR==4) printf \"%3.0f\n\", 100 - \$NF }'"]], 5,
+    watch([[bash -c "mpstat -P 1 5 1 | awk '{if(NR==4) printf \"%3.0f\n\", 100 - \$NF }'"]], 1,
     function(widget, s)
         widget:add_value(tonumber(s) / 100)
     end,
     cpugraph_cpu2)
-    watch([[bash -c "mpstat -P 2 1 1 | awk '{if(NR==4) printf \"%3.0f\n\", 100 - \$NF }'"]], 5,
+    watch([[bash -c "mpstat -P 2 5 1 | awk '{if(NR==4) printf \"%3.0f\n\", 100 - \$NF }'"]], 1,
     function(widget, s)
         widget:add_value(tonumber(s) / 100)
     end,
     cpugraph_cpu3)
-    watch([[bash -c "mpstat -P 3 1 1 | awk '{if(NR==4) printf \"%3.0f\n\", 100 - \$NF }'"]], 5,
+    watch([[bash -c "mpstat -P 3 5 1 | awk '{if(NR==4) printf \"%3.0f\n\", 100 - \$NF }'"]], 1,
     function(widget, s)
         widget:add_value(tonumber(s) / 100)
     end,
     cpugraph_cpu4)
-    watch([[bash -c "mpstat -P 4 1 1 | awk '{if(NR==4) printf \"%3.0f\n\", 100 - \$NF }'"]], 5,
+    watch([[bash -c "mpstat -P 4 5 1 | awk '{if(NR==4) printf \"%3.0f\n\", 100 - \$NF }'"]], 1,
     function(widget, s)
         widget:add_value(tonumber(s) / 100)
     end,
     cpugraph_cpu5)
-    watch([[bash -c "mpstat -P 5 1 1 | awk '{if(NR==4) printf \"%3.0f\n\", 100 - \$NF }'"]], 5,
+    watch([[bash -c "mpstat -P 5 5 1 | awk '{if(NR==4) printf \"%3.0f\n\", 100 - \$NF }'"]], 1,
     function(widget, s)
         widget:add_value(tonumber(s) / 100)
     end,
     cpugraph_cpu6)
-    watch([[bash -c "mpstat -P 6 1 1 | awk '{if(NR==4) printf \"%3.0f\n\", 100 - \$NF }'"]], 5,
+    watch([[bash -c "mpstat -P 6 5 1 | awk '{if(NR==4) printf \"%3.0f\n\", 100 - \$NF }'"]], 1,
     function(widget, s)
         widget:add_value(tonumber(s) / 100)
     end,
     cpugraph_cpu7)
-    watch([[bash -c "mpstat -P 7 1 1 | awk '{if(NR==4) printf \"%3.0f\n\", 100 - \$NF }'"]], 5,
+    watch([[bash -c "mpstat -P 7 5 1 | awk '{if(NR==4) printf \"%3.0f\n\", 100 - \$NF }'"]], 1,
     function(widget, s)
         widget:add_value(tonumber(s) / 100)
     end,
