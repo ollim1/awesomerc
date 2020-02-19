@@ -329,19 +329,13 @@ awful.screen.connect_for_each_screen(function(s)
         },
         layout = wibox.container.mirror
     }
---     cpuwidget = wibox.widget.textbox()
---     vicious.register(cpuwidget, vicious.widgets.cpu,
---     function (widget, args)
---         return ("<span font='monospace'>%3d%% (%3d%%%3d%%%3d%%%3d%%%3d%%%3d%%%3d%%%3d%%)</span>"):format(args[1],args[2],args[3],args[4],args[5],args[6],args[7],args[8],args[9])
---     end, 5)
     cpuwidget_container = wibox.widget {
         wibox.widget {
             wibox.widget.imagebox(os.getenv("HOME").."/.config/awesome/icons/indicator-cpufreq_17x17.png", false),
---             wibox.widget {
---                 cpuwidget,
---                 layout = wibox.container.margin(_, 0, 0, 2)
---             },
-            cpugraph_container,
+            wibox.widget {
+                cpugraph_container,
+                layout = wibox.container.margin(_, 4, 0, 0)
+            },
             layout = wibox.layout.fixed.horizontal
         },
         layout = wibox.container.margin(_, 4, 4, 0)
