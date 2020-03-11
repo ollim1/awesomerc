@@ -577,7 +577,11 @@ globalkeys = gears.table.join(
               {description = "Toggle systray visibility", group = "custom"}),
     awful.key({"Mod4",    "Mod1"}, "c",
               function () awful.spawn.with_shell("mpc toggle") end,
-              { description = "play/pause mpd" })
+              { description = "play/pause mpd" }),
+    awful.key({ modkey, "Control" }, "Tab", function () awful.screen.focus_relative( 1) end,
+              {description = "focus the next screen", group = "screen"}),
+    awful.key({ modkey, "Control", "Shift" }, "Tab", function () awful.screen.focus_relative(-1) end,
+              {description = "focus the previous screen", group = "screen"})
 )
 
 if host.is_laptop == true then
