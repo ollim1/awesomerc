@@ -230,7 +230,7 @@ awful.screen.connect_for_each_screen(function(s)
         screen  = s,
         filter  = awful.widget.tasklist.filter.currenttags,
         buttons = tasklist_buttons,
-        -- remove tasklist text, shrink tasklist item margins
+        -- remove tasklist text
         layout = wibox.layout.fixed.horizontal(),
         widget_template = {
             {
@@ -239,9 +239,11 @@ awful.screen.connect_for_each_screen(function(s)
                         id     = 'icon_role',
                         widget = wibox.widget.imagebox,
                     },
-                    margins = 2,
+                    margins = 0,
                     widget  = wibox.container.margin,
                 },
+                left   = 1,
+                right  = 1,
                 widget = wibox.container.margin
             },
             id     = 'background_role',
