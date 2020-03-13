@@ -242,8 +242,8 @@ awful.screen.connect_for_each_screen(function(s)
                     margins = 0,
                     widget  = wibox.container.margin,
                 },
-                left   = 1,
-                right  = 1,
+                left   = 5,
+                right  = 5,
                 widget = wibox.container.margin
             },
             id     = 'background_role',
