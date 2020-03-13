@@ -331,7 +331,7 @@ awful.screen.connect_for_each_screen(function(s)
     }
     cpuwidget_container = wibox.widget {
         wibox.widget {
-            wibox.widget.imagebox(os.getenv("HOME").."/.config/awesome/icons/indicator-cpufreq_17x17.png", false),
+            wibox.widget.imagebox(os.getenv("HOME").."/.config/awesome/icons/indicator-cpufreq_17x17.png", true),
             wibox.widget {
                 cpugraph_container,
                 layout = wibox.container.margin(_, 4, 0, 0)
@@ -348,7 +348,7 @@ awful.screen.connect_for_each_screen(function(s)
     end, 5)
     memwidget_container = wibox.widget {
         wibox.widget {
-            wibox.widget.imagebox(os.getenv("HOME").."/.config/awesome/icons/indicator-sensors-memory.png", false),
+            wibox.widget.imagebox(os.getenv("HOME").."/.config/awesome/icons/indicator-sensors-memory.png", true),
             wibox.widget {
                 memwidget,
                 layout = wibox.container.margin(_, 0, 0, 2)
