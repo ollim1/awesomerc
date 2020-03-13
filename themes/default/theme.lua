@@ -30,6 +30,7 @@ theme.border_normal = "#0000007f"
 theme.border_focus  = "#808080"
 theme.border_marked = "#91231c"
 
+theme.tasklist_disable_task_name = true
 theme.tasklist_bg_normal = "#00000000"
 theme.graph_fg = "#d3dae3"
 theme.graph_bg = "#00000000"
