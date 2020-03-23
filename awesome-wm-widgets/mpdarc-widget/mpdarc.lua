@@ -19,6 +19,8 @@ local PAUSE_MPD_CMD = "mpc pause"
 local STOP_MPD_CMD = "mpc stop"
 local NEXT_MPD_CMD = "mpc next"
 local PREV_MPD_CMD = "mpc prev"
+local VOLUP_MPD_CMD = "mpc volume +5"
+local VOLDN_MPD_CMD = "mpc volume -5"
 
 local PATH_TO_ICONS = "/usr/share/icons/Arc"
 local PAUSE_ICON_NAME = PATH_TO_ICONS .. "/actions/24/player_pause.png"
@@ -83,8 +85,10 @@ mpdarc:connect_signal("button::press", function(_, _, _, button)
     if (button == 1) then awful.spawn(TOGGLE_MPD_CMD, false)      -- left click
     elseif (button == 2) then awful.spawn(STOP_MPD_CMD, false)
     elseif (button == 3) then awful.spawn(PAUSE_MPD_CMD, false)
-    elseif (button == 4) then awful.spawn(NEXT_MPD_CMD, false)  -- scroll up
-    elseif (button == 5) then awful.spawn(PREV_MPD_CMD, false)  -- scroll down
+    elseif (button == 4) then awful.spawn(VOLUP_MPD_CMD, false)  -- scroll up
+    elseif (button == 5) then awful.spawn(VOLDN_MPD_CMD, false)  -- scroll down
+    elseif (button == 6) then awful.spawn(NEXT_MPD_CMD, false)
+    elseif (button == 7) then awful.spawn(PREV_MPD_CMD, false)
     end
 
     spawn.easy_async(GET_MPD_CMD, function(stdout, stderr, exitreason, exitcode)
