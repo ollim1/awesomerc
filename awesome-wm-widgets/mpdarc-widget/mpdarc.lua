@@ -48,7 +48,7 @@ local mpdarc = wibox.widget {
     widget = wibox.container.arcchart
 }
 
-local mpdarc_icon_widget = wibox.container.mirror(mpdarc, { horizontal = true })
+local mpdarc_icon_widget = wibox.container.mirror(mpdarc, { horizontal = false, vertical = true})
 local mpdarc_current_song_widget = wibox.widget {
     id = 'current_song',
     widget = wibox.widget.textbox,
@@ -63,7 +63,7 @@ local update_graphic = function(widget, stdout, _, _, _)
     if mpdstatus == "playing" then 
       icon.image = PLAY_ICON_NAME
       widget.colors = { beautiful.widget_main_color }
-      widget.value = tonumber((100-mpdpercent)/100)
+      widget.value = tonumber(mpdpercent/100)
       mpdarc_current_song_widget.markup = current_song
     elseif mpdstatus == "paused" then
       icon.image = PAUSE_ICON_NAME
