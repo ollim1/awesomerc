@@ -22,24 +22,24 @@ local PREV_MPD_CMD = "mpc prev"
 local VOLUP_MPD_CMD = "mpc volume +5"
 local VOLDN_MPD_CMD = "mpc volume -5"
 
-local PATH_TO_ICONS = "/usr/share/icons/Arc"
-local PAUSE_ICON_NAME = PATH_TO_ICONS .. "/actions/24/player_pause.png"
-local PLAY_ICON_NAME = PATH_TO_ICONS .. "/actions/24/player_play.png"
-local STOP_ICON_NAME = PATH_TO_ICONS .. "/actions/24/player_stop.png"
+local PATH_TO_ICONS = "/usr/share/icons/Papirus-Dark"
+local PAUSE_ICON_NAME = PATH_TO_ICONS .. "/24x24/actions/player_pause.svg"
+local PLAY_ICON_NAME = PATH_TO_ICONS .. "/24x24/actions/player_play.svg"
+local STOP_ICON_NAME = PATH_TO_ICONS .. "/24x24/actions/player_stop.svg"
 
 local icon = wibox.widget { 
         id = "icon",
         widget = wibox.widget.imagebox,
         image = PLAY_ICON_NAME
     }
-local mirrored_icon = wibox.container.mirror(icon, { horizontal = true })
+local mirrored_icon = wibox.container.mirror(icon, { horizontal = false })
 
 local mpdarc = wibox.widget {
     mirrored_icon,
     max_value = 1,
     value = 0.75,
     thickness = 2,
-    start_angle = 4.71238898, -- 2pi*3/4
+    start_angle = -0.78539816339744830962, -- -1/4*pi
     forced_height = 32,
     forced_width = 32,
     rounded_edge = true,
@@ -58,17 +58,17 @@ local mpdarc_current_song_widget = wibox.widget {
 local update_graphic = function(widget, stdout, _, _, _)
     local current_song = string.gmatch(stdout, "[^\r\n]+")()
     stdout = string.gsub(stdout, "\n", "")
-    local mpdpercent = string.match(stdout, "(%d%d)%%")
+    local mpdpercent = string.match(stdout, "volume:[ ]*(%d+)%%")
     local mpdstatus = string.match(stdout, "%[(%a+)%]")
     if mpdstatus == "playing" then 
       icon.image = PLAY_ICON_NAME
       widget.colors = { beautiful.widget_main_color }
-      widget.value = tonumber(mpdpercent/100)
+      widget.value = tonumber(mpdpercent/100 * 0.75)
       mpdarc_current_song_widget.markup = current_song
     elseif mpdstatus == "paused" then
       icon.image = PAUSE_ICON_NAME
       widget.colors = { beautiful.widget_main_color }
-      widget.value = tonumber(mpdpercent/100)
+      widget.value = tonumber(mpdpercent/100 * 0.75)
       mpdarc_current_song_widget.markup = current_song
     else
       icon.image = STOP_ICON_NAME
