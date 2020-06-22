@@ -556,7 +556,7 @@ globalkeys = gears.table.join(
               function () awful.spawn.with_shell("xclip -o | xargs mpv") end,
               { description = "open copied url in mpv" }),
     awful.key({"Mod4", "Mod1"}, "m",
-              function () awful.spawn.with_shell("~/.scripts/sinkswitch.sh") end,
+              function () awful.spawn.with_shell("~/Documents/tools/sinkswitch.sh") end,
               { description = "switch pulseaudio output sink of currently active client" }),
     awful.key({"Control", "Mod1"}, "l",
               function () awful.spawn.with_shell("i3lock -uc aa0000") end,
