@@ -13,8 +13,8 @@ Before using, create the files `host.lua`, `autorun.sh` `~/.fehbg`. `host.lua` s
 
 ```
 local host = {}
-is_laptop = false
-gap = 0
+host.is_laptop = false
+host.gap = 0
 return host
 ```
 
