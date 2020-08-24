@@ -559,7 +559,7 @@ globalkeys = gears.table.join(
               function () awful.spawn.with_shell("~/Documents/tools/sinkswitch.sh") end,
               { description = "switch pulseaudio output sink of currently active client" }),
     awful.key({"Control", "Mod1"}, "l",
-              function () awful.spawn.with_shell("i3lock -uc aa0000") end,
+              function () awful.spawn.with_shell("i3lock -c aa0000") end,
               { description = "lock the screen" }),
     awful.key({"Control", "Mod1"}, "Delete",
               function () awful.spawn.with_shell("systemctl suspend") end,
