@@ -75,7 +75,7 @@ sort_client = function(c)
     -- assign tags to windows based on name
     if c.name then
         local tagstring = nil
-        if string.match(c.name, "%[%[fun%]%]") or string.match(c.name, "%[%[rice%]%]") then
+        if string.match(c.name, "%[%[fun%]%]") or string.match(c.name, "%[%[rice%]%]") or string.match(c.name, "%[%[web%]%]") then
             tagstring = "web"
         elseif string.match(c.name, "%[%[school1%]%]") then
             tagstring = "school1"
