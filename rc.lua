@@ -396,17 +396,18 @@ awful.screen.connect_for_each_screen(function(s)
         arandr_button = awful.widget.launcher({ image = "/home/londes/.icons/Papirus/24x24/panel/desktopconnected.svg" , command = "arandr" })
     end
 
-
     -- Add widgets to the wibox
     s.mywibox:setup {
         layout = wibox.layout.align.horizontal,
+        expand = 'none',
         { -- Left widgets
             layout = wibox.layout.fixed.horizontal,
             mylauncher,
             s.mytaglist,
             s.mypromptbox,
+            s.mytasklist, -- Middle widget
         },
-        s.mytasklist, -- Middle widget
+        clock_container,
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
             s.systray,
@@ -415,7 +416,6 @@ awful.screen.connect_for_each_screen(function(s)
             batwidget_container,
             cpuwidget_container,
             memwidget_container,
-            clock_container,
             arandr_button,
             s.mylayoutbox,
         },
