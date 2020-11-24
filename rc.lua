@@ -151,8 +151,10 @@ mykeyboardlayout = awful.widget.keyboardlayout()
 -- {{{ Wibar
 -- Create a textclock widget
 -- EDIT: adjust margin
+local clock_widget = wibox.widget.textclock()
+clock_widget:set_font("sans bold 7")
 clock_container = wibox.widget {
-    wibox.widget.textclock(),
+    clock_widget,
     layout = wibox.container.margin(_, 4, 8, 0)
 }
 
