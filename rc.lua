@@ -31,6 +31,8 @@ if awesome.startup_errors then
                      title = "Oops, there were errors during startup!",
                      text = awesome.startup_errors })
 end
+-- set notification icon size
+naughty.config.defaults['icon_size'] = 100
 
 -- Handle runtime errors after startup
 do
@@ -555,7 +557,7 @@ globalkeys = gears.table.join(
               function () awful.spawn.with_shell("sleep 0.1 && ~/.scripts/screenshot2.sh crop") end,
               { description = "take a cropped screenshot" }),
     awful.key({"Mod4", "Mod1"}, "n",
-              function () awful.spawn.with_shell("xclip -o | xargs mpv") end,
+              function () awful.spawn.with_shell("xclip -selection clipboard -o | xargs mpv") end,
               { description = "open copied url in mpv" }),
     awful.key({"Mod4", "Mod1"}, "m",
               function () awful.spawn.with_shell("~/Documents/tools/sinkswitch.sh") end,
@@ -591,6 +593,12 @@ globalkeys = gears.table.join(
     awful.key({modkey,    "Mod1"}, "t",
               function () awful.spawn("telegram-desktop") end,
               { description = "open Telegram" }),
+    awful.key({modkey,    "Mod1"}, "d",
+              function () awful.spawn("discord-canary") end,
+              { description = "open Discord" }),
+    awful.key({modkey,    "Mod1"}, "y",
+              function () awful.spawn("signal-desktop --start-in-tray") end,
+              { description = "open Signal" }),
     awful.key({ modkey }, "=",
               function ()
                 awful.screen.focused().systray.visible = not awful.screen.focused().systray.visible
@@ -802,7 +810,7 @@ awful.rules.rules = {
     -- EDIT: custom rules
     -- { rule = { class = "mpv" },
     -- properties = { floating = true }},
-    { rule_any = { class = { "TelegramDesktop", "Audacious" }},
+    { rule_any = { class = { "TelegramDesktop" }},
         screen = awful.screen.focused,
         properties = { sticky = true, skip_taskbar = true }
     }
